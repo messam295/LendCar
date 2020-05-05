@@ -7,9 +7,9 @@ using LendCar.Models;
 
 namespace LendCar.Repository
 {
-    public class PersonRepository : IPersonRepository
+    public class UserRepository : IUserRepository
     {
-        public PersonRepository(LendCarDBContext Context)
+        public UserRepository(LendCarDBContext Context)
         {
             this.Context = Context;
         }

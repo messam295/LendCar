@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using LendCar.DBContext;
 namespace LendCar.Repository
 {
-    interface IPersonRepository
+    interface IUserRepository
     {
         LendCarDBContext Context { get; }
         ApplicationUser Find(string id);
