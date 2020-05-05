@@ -22,6 +22,10 @@ namespace LendCar.Models
         public string Model { get; set; }
         //NameOfBrand
         public string Brand { get; set; }
+        public int NumberOfSeats { get; set; }
+        public int NumberOfDoors { get; set; }
+        public double milesPerGallon { get; set; }
+        public string EnergyMakeCarMove { get; set; }
         public List<Img> Photos { get; set; }
         public int TripsNumber { get; set; }
         public double PricePerDay { get; set; }
