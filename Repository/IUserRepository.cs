@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using LendCar.DBContext;
 namespace LendCar.Repository
 {
-    interface IUserRepository
+  public  interface IUserRepository
     {
         LendCarDBContext Context { get; }
         ApplicationUser Find(string id);
+
         void Save();
     }
 }

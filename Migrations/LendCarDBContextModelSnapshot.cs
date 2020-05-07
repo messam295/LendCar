@@ -56,7 +56,7 @@ namespace LendCar.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("GenderId")
+                    b.Property<int>("GenderId")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
@@ -72,6 +72,7 @@ namespace LendCar.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NationalId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -96,6 +97,9 @@ namespace LendCar.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TripsNumber")
+                        .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -151,7 +155,7 @@ namespace LendCar.Migrations
 
                     b.HasIndex("VehicleVIN");
 
-                    b.ToTable("Img");
+                    b.ToTable("Imges");
                 });
 
             modelBuilder.Entity("LendCar.Models.OdoMeter", b =>
@@ -187,8 +191,17 @@ namespace LendCar.Migrations
                     b.Property<string>("EndDate")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("EnergyMakeCarMove")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfDoors")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfSeats")
+                        .HasColumnType("int");
 
                     b.Property<int?>("OdoMeterId")
                         .HasColumnType("int");
@@ -219,6 +232,9 @@ namespace LendCar.Migrations
 
                     b.Property<string>("Year")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("milesPerGallon")
+                        .HasColumnType("float");
 
                     b.Property<double>("rate")
                         .HasColumnType("float");
@@ -385,14 +401,16 @@ namespace LendCar.Migrations
             modelBuilder.Entity("LendCar.Models.ApplicationUser", b =>
                 {
                     b.HasOne("LendCar.Models.Gender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId");
+                        .WithMany("Users")
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("LendCar.Models.Img", b =>
                 {
-                    b.HasOne("LendCar.Models.Vehicle", null)
-                        .WithMany("Photos")
+                    b.HasOne("LendCar.Models.Vehicle", "Vehicle")
+                        .WithMany("Images")
                         .HasForeignKey("VehicleVIN");
                 });
 

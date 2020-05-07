@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace LendCar.Repository
 {
-    interface ICarRepository
+    public interface ICarRepository
     {
         LendCarDBContext Context { get; }
         Vehicle Find(string id);
+        List<Img> GetImgForCurrntCar(string id);
         void Save();
     }
 }
