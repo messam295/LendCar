@@ -16,6 +16,11 @@ namespace LendCar.Models
       
         [DataType(DataType.ImageUrl)]
         public string Image { get; set; }
+<<<<<<< HEAD
+=======
+        public int VehicleId { get; set; }
+        [ForeignKey("VehicleId")]
+>>>>>>> 612fbfd0030ede5d44553c132b870d4bdf66f690
         public Vehicle Vehicle { get; set; }
 
     }
