@@ -15,7 +15,7 @@ namespace LendCar.Repository
         List<Img> GetImgForCurrntCar(string id);
 =======
         Vehicle GetVehicle(int id);
-        List<Vehicle> GetAllVehicles();
+        IQueryable<Vehicle> GetAllVehicles();
         void Add(Vehicle vehicle);
         void Delete(int id);
 >>>>>>> 612fbfd0030ede5d44553c132b870d4bdf66f690
