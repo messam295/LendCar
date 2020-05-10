@@ -10,7 +10,7 @@ namespace LendCar.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [Required]
+       
         public string NationalId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -34,8 +34,7 @@ namespace LendCar.Models
         public int GenderId { get; set; }
         [ForeignKey("GenderId")]
         public Gender Gender { get; set; }
-
-        [InverseProperty("Owner")]
+        
         public virtual ICollection<Vehicle> VehiclesOwnedByHim { get; set; }
 
         [InverseProperty("Renter")]
@@ -44,8 +43,6 @@ namespace LendCar.Models
 //HEAD
         // public ICollection<Vehicle> Vehicles { get; set; }
 
- //c07c1805e91b39914557ab570427b249dd777b46
+
     }
-
-
 }

@@ -14,12 +14,12 @@ namespace LendCar.Repository
             this.Context = Context;
         }
         public LendCarDBContext Context { get; }
-<<<<<<< HEAD
-        public ApplicationUser Find(string id) => Context.People.SingleOrDefault(p => p.Id == id);
 
-=======
+        //public ApplicationUser Find(string id) => Context.People.SingleOrDefault(p => p.Id == id);
+
+
+        //public ApplicationUser Find(string id) => Context.Users.SingleOrDefault(p => p.NationalId == id);
         public ApplicationUser Find(string id) => Context.Users.SingleOrDefault(p => p.NationalId == id);
->>>>>>> dbde1e69832044cba229375719faa01703521524
         public void Save() => Context.SaveChanges();
 
     }

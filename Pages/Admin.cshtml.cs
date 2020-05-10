@@ -4,12 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using LendCar.Models;
 using LendCar.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using X.PagedList;
 
 namespace LendCar.Pages
 {
+    [Authorize(Roles = "Admin")]
+
     public class AdminModel : PageModel
     {
         public ICarRepository ICarRepository { get; }
@@ -37,7 +40,7 @@ namespace LendCar.Pages
 
             CurrentPage = pageNumber;
 
-            Vehicles = ICarRepository.GetAllVehicles().ToList().ToPagedList(pageNumber, 10);
+            //Vehicles = ICarRepository.GetAllVehicles().ToList().ToPagedList(pageNumber, 10);
         }
     }
 }

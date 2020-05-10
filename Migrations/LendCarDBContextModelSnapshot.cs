@@ -72,7 +72,6 @@ namespace LendCar.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NationalId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -123,6 +122,45 @@ namespace LendCar.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("LendCar.Models.Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands");
+                });
+
+            modelBuilder.Entity("LendCar.Models.BrandModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
+
+                    b.ToTable("BrandModels");
+                });
+
             modelBuilder.Entity("LendCar.Models.Gender", b =>
                 {
                     b.Property<int>("Id")
@@ -148,12 +186,12 @@ namespace LendCar.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("VehicleVIN")
-                        .HasColumnType("nvarchar(17)");
+                    b.Property<int>("VehicleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VehicleVIN");
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("Imges");
                 });
@@ -175,14 +213,15 @@ namespace LendCar.Migrations
 
             modelBuilder.Entity("LendCar.Models.Vehicle", b =>
                 {
-                    b.Property<string>("VIN")
-                        .HasColumnType("nvarchar(17)")
-                        .HasMaxLength(17);
-
-                    b.Property<string>("Brand")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
@@ -194,8 +233,14 @@ namespace LendCar.Migrations
                     b.Property<string>("EnergyMakeCarMove")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Model")
+                    b.Property<double>("GasMileage")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
 
                     b.Property<int>("NumberOfDoors")
                         .HasColumnType("int");
@@ -203,7 +248,7 @@ namespace LendCar.Migrations
                     b.Property<int>("NumberOfSeats")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OdoMeterId")
+                    b.Property<int>("OdoMeterId")
                         .HasColumnType("int");
 
                     b.Property<string>("OwnerId")
@@ -215,6 +260,9 @@ namespace LendCar.Migrations
                     b.Property<double>("PricePerDay")
                         .HasColumnType("float");
 
+                    b.Property<double?>("Rate")
+                        .HasColumnType("float");
+
                     b.Property<string>("Region")
                         .HasColumnType("nvarchar(max)");
 
@@ -224,22 +272,22 @@ namespace LendCar.Migrations
                     b.Property<string>("StartDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TripsNumber")
+                    b.Property<int?>("TripsNumber")
                         .HasColumnType("int");
 
-                    b.Property<int?>("VehicleTypeId")
+                    b.Property<string>("VIN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VehicleTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Year")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("milesPerGallon")
-                        .HasColumnType("float");
+                    b.HasKey("Id");
 
-                    b.Property<double>("rate")
-                        .HasColumnType("float");
-
-                    b.HasKey("VIN");
+                    b.HasIndex("ModelId");
 
                     b.HasIndex("OdoMeterId");
 
@@ -407,18 +455,37 @@ namespace LendCar.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("LendCar.Models.BrandModel", b =>
+                {
+                    b.HasOne("LendCar.Models.Brand", "Brand")
+                        .WithMany("BrandModels")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("LendCar.Models.Img", b =>
                 {
                     b.HasOne("LendCar.Models.Vehicle", "Vehicle")
-                        .WithMany("Images")
-                        .HasForeignKey("VehicleVIN");
+                        .WithMany("Photos")
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("LendCar.Models.Vehicle", b =>
                 {
-                    b.HasOne("LendCar.Models.OdoMeter", "OdoMeter")
+                    b.HasOne("LendCar.Models.BrandModel", "Model")
                         .WithMany()
-                        .HasForeignKey("OdoMeterId");
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LendCar.Models.OdoMeter", "OdoMeter")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("OdoMeterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("LendCar.Models.ApplicationUser", "Owner")
                         .WithMany("VehiclesOwnedByHim")
@@ -430,7 +497,9 @@ namespace LendCar.Migrations
 
                     b.HasOne("LendCar.Models.VehicleType", "VehicleType")
                         .WithMany()
-                        .HasForeignKey("VehicleTypeId");
+                        .HasForeignKey("VehicleTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

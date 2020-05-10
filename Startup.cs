@@ -34,16 +34,21 @@ namespace LendCar
         {
             services.AddDbContext<LendCarDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("LendCarCString")));
-            
+           
+
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICarRepository, CarRepository>();
-
             services.AddTransient<IVehicleTypeRepository, VehicleTypeRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IBrandModelRepository, BrandModelRepository>();
             
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<LendCarDBContext>();
-            
+            services.ConfigureApplicationCookie(option =>
+            {
+
+                option.LoginPath = "/Login";
+            }
+            );
             services.AddControllers();
             services.AddRazorPages();
         }
@@ -64,11 +69,15 @@ namespace LendCar
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+           
+            app.UseCookiePolicy();
 
             app.UseRouting();
-
+           
+            app.UseAuthentication();
             app.UseAuthorization();
-          
+            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
