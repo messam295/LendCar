@@ -17,6 +17,7 @@
                 <div class="item col-lg-4 ">
                     <div class="ts-team-wrapper">
                         <div class="team-img-wrapper">
+<<<<<<< HEAD
                             <img alt="" src="@Url.Content(Model[i].ImageUrl)" class="img-responsive">
                         </div>
                         <div class="ts-team-content">
@@ -26,18 +27,26 @@
                             <p>color: Red</p>
                             <strong>@Model[i].PricePerDay $ Daily</strong><br><br>
                             <img alt="" src="@Url.Content("~/CarPhotosUploaded/"+Model[i].ImageUrl)" class="img-responsive">
+=======
+
+                            <img alt="" src="@Url.Content(Model[i].ImageUrl)" class="img-responsive">
+
+>>>>>>> e6a2845043cea0cb693daa51fb5515f2f9611ea7
                         </div>
                         <div class="ts-team-content">
 
-                            <h2 class="ts-name">@Model[i].Model.Brand.Name </h2>
-                            <p class="ts-designation">@Model[i].Model.Name </p> @*null*@
+                            <h2 class="ts-name">@Model[i].Model.Brand.Name @Model[i].Model.Name @Model[i].Year</h2>
 
-                            <h2 class="ts-name">@Model[i].Color</h2>
-                            <p class="ts-designation">@Model[i].EndDate</p>
+                            <p class="ts-designation">Available from: @Model[i].StartDate</p>
 
-                            <p class="ts-description">@Model[i].VIN</p>
-                            <p>color: Car Color</p>
+                            <p class="ts-designation">Available until: @Model[i].EndDate</p>
+
+                            @*<p class="ts-description">@Model[i].VIN</p>*@
+                            
+                            <p>Color:<strong style="color:@Model[i].Color.HexValue"> @Model[i].Color.Name</strong></p>
+                            
                             <strong>@Model[i].PricePerDay EGP Daily</strong><br><br>
+
                             <a class="btn btn-warning" asp-page="/carDetails" asp-route-Id="@Model[i].Id">GO Detils</a>
                         </div>
                     </div><!--/ Team wrapper end -->

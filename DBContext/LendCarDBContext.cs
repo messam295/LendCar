@@ -24,6 +24,9 @@ namespace LendCar.DBContext
 
         public DbSet<Brand> Brands { get; set; }
         public DbSet<BrandModel> BrandModels { get; set; }
+        public DbSet<VehicleBooking> VehicleBookings { get; set; }
+        public DbSet<CarImage> CarImages { get; set; }
+        public DbSet<Color> Colors { get; set; }
 
 
     }

@@ -25,13 +25,11 @@ namespace LendCar.Pages
     {
 
 
-        private readonly ILogger<IndexModel> _logger;
         public ICarRepository ICarRepository { get; }
         public IPagedList<Vehicle> Vehicles { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, ICarRepository ICarRepository)
+        public IndexModel(ICarRepository ICarRepository)
         {
-            _logger = logger;
             this.ICarRepository = ICarRepository;
         }
 
@@ -55,6 +53,13 @@ namespace LendCar.Pages
             //Vehicles = ICarRepository.GetAllVehicles().ToList().ToPagedList(pageNumber, 9);
 
             //Vehicles = ICarRepository.GetAllVehicles().Include(v=>v.Model).ThenInclude(v=>v.Brand).ToList().ToPagedList(pageNumber, 9);
+
+            Vehicles = ICarRepository.GetAllVehicles()
+                                     .Include(v=>v.Color)
+                                     .Include(v=>v.Model)
+                                     .ThenInclude(v=>v.Brand)
+                                     .ToList()
+                                     .ToPagedList(pageNumber, 9);
         }
 
     }

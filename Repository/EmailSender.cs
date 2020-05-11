@@ -45,7 +45,7 @@ namespace LendCar.Repository
                     Text = message
                 };
 
-                using (var client = new SmtpClient())
+                var client = new SmtpClient();
                 {
                     // For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
                     client.ServerCertificateValidationCallback = (s, c, h, e) => true;
