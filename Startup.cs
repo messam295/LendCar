@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace LendCar
 {
@@ -28,6 +29,7 @@ namespace LendCar
         }
 
         public IConfiguration Configuration { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -41,8 +43,14 @@ namespace LendCar
             services.AddTransient<IVehicleTypeRepository, VehicleTypeRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IBrandModelRepository, BrandModelRepository>();
-            
-            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<LendCarDBContext>();
+
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddSingleton<IEmailSender, EmailSender>();
+
+
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<LendCarDBContext>().AddDefaultTokenProviders(); ;
             services.ConfigureApplicationCookie(option =>
             {
 
@@ -51,6 +59,8 @@ namespace LendCar
             );
             services.AddControllers();
             services.AddRazorPages();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
