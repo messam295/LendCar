@@ -14,7 +14,7 @@ namespace LendCar.Pages
         public Vehicle CurrentCar { get; set; }
         public ApplicationUser Owner { get; set; }
 
-        public List<Img> CurrentCarImges;
+        public List<CarImage> CurrentCarImges;
         public ICarRepository CarRepository { get; }
         public IUserRepository UserRepository { get; }
 

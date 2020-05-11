@@ -1,4 +1,4 @@
-﻿@model X.PagedList.PagedList<LendCar.Models.Vehicle>
+﻿@*@model X.PagedList.PagedList<LendCar.Models.Vehicle>
 
 @for (int i = 0; i < Model.Count; i++)
 {
@@ -17,7 +17,6 @@
                 <div class="item col-lg-4 ">
                     <div class="ts-team-wrapper">
                         <div class="team-img-wrapper">
-<<<<<<< HEAD
                             <img alt="" src="@Url.Content(Model[i].ImageUrl)" class="img-responsive">
                         </div>
                         <div class="ts-team-content">
@@ -27,11 +26,10 @@
                             <p>color: Red</p>
                             <strong>@Model[i].PricePerDay $ Daily</strong><br><br>
                             <img alt="" src="@Url.Content("~/CarPhotosUploaded/"+Model[i].ImageUrl)" class="img-responsive">
-=======
+
 
                             <img alt="" src="@Url.Content(Model[i].ImageUrl)" class="img-responsive">
 
->>>>>>> e6a2845043cea0cb693daa51fb5515f2f9611ea7
                         </div>
                         <div class="ts-team-content">
 
@@ -41,7 +39,7 @@
 
                             <p class="ts-designation">Available until: @Model[i].EndDate</p>
 
-                            @*<p class="ts-description">@Model[i].VIN</p>*@
+                            <p class="ts-description">@Model[i].VIN</p>
                             
                             <p>Color:<strong style="color:@Model[i].Color.HexValue"> @Model[i].Color.Name</strong></p>
                             
@@ -49,10 +47,10 @@
 
                             <a class="btn btn-warning" asp-page="/carDetails" asp-route-Id="@Model[i].Id">GO Detils</a>
                         </div>
-                    </div><!--/ Team wrapper end -->
+                    </div>/ Team wrapper end 
                 </div>
             }
 
         </div>
     </section>
-}
+}*@

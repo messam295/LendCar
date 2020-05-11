@@ -16,11 +16,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
 using Microsoft.AspNetCore.Mvc;
-<<<<<<< HEAD
 using Microsoft.AspNetCore.Identity.UI.Services;
-=======
+
 using Microsoft.Extensions.Options;
->>>>>>> e6a2845043cea0cb693daa51fb5515f2f9611ea7
 
 namespace LendCar
 {
@@ -47,7 +45,7 @@ namespace LendCar
             services.AddTransient<IVehicleTypeRepository, VehicleTypeRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
             services.AddTransient<IBrandModelRepository, BrandModelRepository>();
-<<<<<<< HEAD
+
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.AddSingleton<IEmailSender, EmailSender>();
@@ -62,10 +60,9 @@ namespace LendCar
                 option.LoginPath = "/Login";
             }
             );
-=======
+
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<LendCarDBContext>();
             
->>>>>>> e6a2845043cea0cb693daa51fb5515f2f9611ea7
             services.AddControllers();
             services.AddRazorPages();
 
@@ -91,17 +88,15 @@ namespace LendCar
             app.UseCookiePolicy();
 
             app.UseRouting();
-<<<<<<< HEAD
            
             app.UseAuthentication();
             app.UseAuthorization();
             
 
-=======
+
 
             app.UseAuthorization();            
           
->>>>>>> e6a2845043cea0cb693daa51fb5515f2f9611ea7
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

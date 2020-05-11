@@ -17,9 +17,9 @@ namespace LendCar.Repository
         public LendCarDBContext Context { get; }
         public Vehicle Find(string id) => Context.Vehicles.SingleOrDefault(v => v.VIN == id);
 
-        public List<Img> GetImgForCurrntCar(string id)
+        public List<CarImage> GetImgForCurrntCar(string id)
         {
-            List<Img> imgs = Context.Imges.Where(i => i.Vehicle.VIN == id).ToList();
+            List<CarImage> imgs = Context.CarImages.Where(i => i.Vehicle.VIN == id).ToList();
             return imgs;
         }
 

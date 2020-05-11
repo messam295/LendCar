@@ -19,9 +19,6 @@ namespace LendCar.DBContext
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<OdoMeter> OdoMeters { get; set; }
         public DbSet<VehicleType> VehicleTypes { get; set; }
-
-        public DbSet<Img> Imges { get; set; }
-
         public DbSet<Brand> Brands { get; set; }
         public DbSet<BrandModel> BrandModels { get; set; }
         public DbSet<VehicleBooking> VehicleBookings { get; set; }
