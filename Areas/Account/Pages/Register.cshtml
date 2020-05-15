@@ -21,13 +21,13 @@
                         <div class="login-group">
                             <div class="form-group">
                                 <label asp-for="Input.UserName" class="sr-only"></label>
-                                <input type="text" asp-for="Input.UserName" class="form-control"  placeholder="username">
+                                <input type="text" asp-for="Input.UserName" class="form-control" placeholder="username">
                                 <span asp-validation-for="Input.UserName" class="text-danger"></span>
 
                             </div>
                             <div class="form-group">
                                 <label asp-for="Input.Password" class="sr-only"></label>
-                                <input type="password" asp-for="Input.Password" class="form-control"  placeholder="password">
+                                <input type="password" asp-for="Input.Password" class="form-control" placeholder="password">
                                 <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
                             <div class="form-group">
@@ -41,16 +41,29 @@
                                 <input type="text" asp-for="Input.Email" class="form-control" placeholder="email">
                                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
-              
-                          
 
-                            <div class="form-group login-group-checkbox">
-                                <input type="checkbox" class="" id="reg_agree" name="reg_agree">
-                                <label for="reg_agree">i agree with <a href="#">terms</a></label>
+                            <div class="form-group">
+                                <label asp-for="Input.PhoneNumber" class="sr-only"></label>
+                                <input type="text" asp-for="Input.PhoneNumber" class="form-control" placeholder="PhoneNumber">
+                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                             </div>
+                            <div class="form-group">
+                                <label asp-for="Input.DriverLicenseNumber" class="sr-only"></label>
+                                <input type="text" asp-for="Input.DriverLicenseNumber" class="form-control" placeholder="">
+                                <span asp-validation-for="Input.DriverLicenseNumber" class="text-danger"></span>
+                            </div>
+                          
+                            @*<div class="form-group">
+                                <INPUT TYPE="Checkbox" Name="Gender" Value="Male">Male
+                                <INPUT TYPE="Checkbox" Name="Gender" Value="Female">Female
+                            </div>*@
+                                <div class="form-group login-group-checkbox">
+                                    <input type="checkbox" class="" id="reg_agree" name="reg_agree">
+                                    <label for="reg_agree">i agree with <a href="#">terms</a></label>
+                                </div>
+                            </div>
+                            <button type="submit" class="login-button"><i class="fas fa-car-side"></i></button>
                         </div>
-                        <button type="submit" class="login-button"><i class="fas fa-car-side"></i></button>
-                    </div>
                     <div class="etc-login-form">
                         <p>already have an account? <a asp-page="/login">login here</a></p>
                     </div>

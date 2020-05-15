@@ -10,19 +10,22 @@ namespace LendCar.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        [Required]
         public string NationalId { get; set; }
+   
         public string FirstName { get; set; }
+      
         public string LastName { get; set; }
         public string Address { get; set; }
-        public int TripsNumber { get; set; }
+        public int TripsNumber { get; set; }      
         public string Region { get; set; }
         [DataType(DataType.ImageUrl)]
         public string ImageUrl { get; set; }
         public string DriverLicenseNumber { get; set; }
         [DataType(DataType.MultilineText)]
         public string BriefAboutMe { get; set; }
-
+        public string BirthDate { get; set; }
+        public new  string PhoneNumber { get; set; }
+        public string JoinedAt { get; set; }
 
         public int CityId { get; set; }
         [ForeignKey("CityId")]
